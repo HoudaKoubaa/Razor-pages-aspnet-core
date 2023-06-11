@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ContosoPizza.Migrations
 {
     [DbContext(typeof(PizzaContext))]
-    [Migration("20230501213855_InitialCreate")]
+    [Migration("20230611174003_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -41,6 +41,34 @@ namespace ContosoPizza.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Pizzas");
+                });
+
+            modelBuilder.Entity("ContosoPizza.Models.Sauce", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Sauces");
+                });
+
+            modelBuilder.Entity("ContosoPizza.Models.Topping", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Toppings");
                 });
 #pragma warning restore 612, 618
         }

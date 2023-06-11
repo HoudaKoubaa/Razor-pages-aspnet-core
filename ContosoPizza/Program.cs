@@ -9,7 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 builder.Services.AddDbContext<PizzaContext>(options =>
     options.UseSqlite("Data Source=ContosoPizza.db"));
-    
+    builder.Services.AddSqlite<PizzaContext>("Data Source=ContosoPizza.db");
     //La méthode AddScoped indique qu’un nouvel objet PizzaService doit être créé pour chaque requête HTTP
 builder.Services.AddScoped<PizzaService>();
 var app = builder.Build();
@@ -31,4 +31,9 @@ app.UseAuthorization();
 
 app.MapRazorPages();
 
+// Add the CreateDbIfNotExists method call
+app.CreateDbIfNotExists();
+app.MapGet("/", () => @"Contoso Pizza management API. Navigate to /swagger to open the Swagger test UI.");
+
 app.Run();
+
